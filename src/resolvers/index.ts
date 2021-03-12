@@ -1,4 +1,5 @@
 import { currentUser, register, login } from "./auth";
+import { createMovie, updateMovie } from "./movie";
 
 const resolverMap = {
   Query: {
@@ -7,6 +8,8 @@ const resolverMap = {
   Mutation: {
     login,
     register,
+    createMovie,
+    updateMovie,
   },
 };
 

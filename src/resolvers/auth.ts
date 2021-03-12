@@ -4,19 +4,23 @@ import { LoginResponse, RegisterResponse, UserInfo, Context } from "../types";
 import { User, UserModel } from "../models";
 
 export async function register(_: void, args: any): Promise<RegisterResponse> {
-  const { username, password } = args;
+  const { firstname, lastname, username, password } = args;
   const existingUser: number = await UserModel.countDocuments({ username });
   if (existingUser) {
     throw new Error("Username already used!");
   }
   const hashedPassword: string = await bcrypt.hash(password, 10);
   const user: User = new UserModel({
+    firstname,
+    lastname,
     username,
     password: hashedPassword,
   });
   await user.save();
   return {
     id: user._id,
+    firstname: user.firstname,
+    lastname: user.lastname,
     username: user.username,
   };
 }
@@ -58,6 +62,8 @@ export async function currentUser(
   }
   return {
     id: user._id,
+    firstname: user.firstname,
+    lastname: user.lastname,
     username: user.username,
   };
 }
