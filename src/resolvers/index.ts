@@ -1,9 +1,11 @@
 import { currentUser, register, login } from "./auth";
-import { createMovie, updateMovie } from "./movie";
+import { createMovie, updateMovie, getAllMovies, getMovie } from "./movie";
 
 const resolverMap = {
   Query: {
     currentUser,
+    getAllMovies,
+    getMovie,
   },
   Mutation: {
     login,

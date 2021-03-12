@@ -45,3 +45,26 @@ export async function updateMovie(_: void, args: any): Promise<MovieResponse> {
     rating: movie.rating,
   };
 }
+
+export async function getAllMovies(_: void): Promise<Movie[]> {
+  return await MovieModel.find();
+}
+
+export async function getMovie(_: void, args: any): Promise<MovieResponse> {
+  const { id } = args;
+
+  const movie: Movie | null = await MovieModel.findOne({ _id: id });
+
+  if (!movie) {
+    throw new Error(`No movie found matching ID: ${id}`);
+  }
+
+  return {
+    id: movie.id,
+    name: movie.name,
+    duration: movie.duration,
+    releaseDate: movie.releaseDate,
+    actors: movie.actors,
+    rating: movie.rating,
+  };
+}
