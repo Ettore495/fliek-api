@@ -22,7 +22,7 @@ export interface Movie {
   duration: string;
   releaseDate: string;
   actors: string;
-  rating: Number;
+  averageRating: Number;
 }
 
 export interface DeleteResponse {

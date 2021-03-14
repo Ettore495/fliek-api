@@ -3,7 +3,7 @@ import { Movie, MovieModel } from "../models";
 
 export async function upsertMovie(_: void, args: any): Promise<MovieResponse> {
   // Get properties on request header
-  const { id, name, duration, releaseDate, actors, rating } = args;
+  const { id, name, duration, releaseDate, actors, averageRating } = args;
 
   // Populate movie model
   const movie: Movie = new MovieModel({
@@ -12,7 +12,7 @@ export async function upsertMovie(_: void, args: any): Promise<MovieResponse> {
     duration,
     releaseDate,
     actors,
-    rating,
+    averageRating,
   });
 
   // Update movie model in DB
@@ -25,7 +25,7 @@ export async function upsertMovie(_: void, args: any): Promise<MovieResponse> {
     duration: movie.duration,
     releaseDate: movie.releaseDate,
     actors: movie.actors,
-    rating: movie.rating,
+    averageRating: movie.averageRating,
   };
 }
 
@@ -48,7 +48,7 @@ export async function getMovie(_: void, args: any): Promise<MovieResponse> {
     duration: movie.duration,
     releaseDate: movie.releaseDate,
     actors: movie.actors,
-    rating: movie.rating,
+    averageRating: movie.averageRating,
   };
 }
 

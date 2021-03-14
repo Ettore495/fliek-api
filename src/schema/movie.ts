@@ -5,7 +5,7 @@ const typeDef = `
         duration: String!
         releaseDate: String!
         actors: String!
-        rating: Int
+        averageRating: Int
     }
 
     type DeleteResponse {
@@ -19,7 +19,7 @@ const typeDef = `
     }
 
     type Mutation {
-        upsertMovie(id: String, name: String!, duration: String!, releaseDate: String!, actors: String!, rating: Int): Movie!
+        upsertMovie(id: String, name: String!, duration: String!, releaseDate: String!, actors: String!): Movie!
         deleteMovie(id: String!): DeleteResponse
     }    
 `;
