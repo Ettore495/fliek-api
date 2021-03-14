@@ -29,3 +29,9 @@ export interface DeleteResponse {
   id: string;
   deletedCount?: number | undefined;
 }
+
+export interface RatingResponse {
+  userId: string;
+  movieId: string;
+  rating: number;
+}
