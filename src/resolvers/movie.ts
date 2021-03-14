@@ -30,13 +30,13 @@ export async function upsertMovie(_: void, args: any): Promise<MovieResponse> {
 }
 
 export async function getAllMovies(_: void, args: any): Promise<Movie[]> {
-  let { filter } = args;
+  let { filter, sortDirection } = args;
 
   if (!filter) {
     filter = "name";
   }
 
-  return await MovieModel.find().sort({ [filter]: "asc" });
+  return await MovieModel.find().sort({ [filter]: sortDirection });
 }
 
 export async function getMovie(_: void, args: any): Promise<MovieResponse> {

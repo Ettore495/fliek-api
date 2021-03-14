@@ -15,7 +15,7 @@ const typeDef = `
 
     type Query {
         getMovie(id: String!): Movie!
-        getAllMovies(filter: String): [Movie]
+        getAllMovies(filter: String, sortDirection: String): [Movie]
     }
 
     type Mutation {
