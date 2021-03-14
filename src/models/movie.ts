@@ -15,7 +15,7 @@ const MovieSchema = new mongoose.Schema(
     releaseDate: { type: String, required: true },
     duration: { type: String, required: true },
     actors: { type: String, required: true },
-    averageRating: { type: String, required: false },
+    averageRating: { type: Number, required: false },
   },
   {
     versionKey: false,
