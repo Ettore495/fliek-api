@@ -14,8 +14,8 @@ const typeDef = `
     }
 
     type Mutation {
-        createMovie(name: String!, duration: String!, releaseDate: String!, actors: String!, rating: Int): Movie!
-        updateMovie(id: String!, name: String!, duration: String!, releaseDate: String!, actors: String!, rating: Int): Movie!
+        upsertMovie(id: String, name: String!, duration: String!, releaseDate: String!, actors: String!, rating: Int): Movie!
+        deleteMovie(id: String!): Boolean
     }    
 `;
 export default typeDef;

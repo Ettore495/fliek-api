@@ -1,24 +1,7 @@
 import { MovieResponse } from "src/types";
 import { Movie, MovieModel } from "../models";
 
-export async function createMovie(_: void, args: any): Promise<Movie> {
-  // Get properties on request header
-  const { name, duration, releaseDate, actors, rating } = args;
-
-  // Populate movie model
-  const movie: Movie = new MovieModel({
-    name,
-    duration,
-    releaseDate,
-    actors,
-    rating,
-  });
-
-  // Save movie model to DB
-  return await movie.save();
-}
-
-export async function updateMovie(_: void, args: any): Promise<MovieResponse> {
+export async function upsertMovie(_: void, args: any): Promise<MovieResponse> {
   // Get properties on request header
   const { id, name, duration, releaseDate, actors, rating } = args;
 
@@ -33,7 +16,7 @@ export async function updateMovie(_: void, args: any): Promise<MovieResponse> {
   });
 
   // Update movie model in DB
-  await movie.updateOne(movie);
+  await movie.updateOne(movie, { upsert: true });
 
   // Return updated movie data
   return {
