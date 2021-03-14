@@ -30,3 +30,10 @@ export async function upsertRating(
     rating,
   };
 }
+
+export async function getRatings(_: void, args: any): Promise<Rating[]> {
+  const { userId } = args;
+
+  const ratings = await RatingModel.find({ userId: userId });
+  return ratings;
+}

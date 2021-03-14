@@ -6,7 +6,7 @@ const typeDef = `
     }
 
     type Query {
-        getRatings(userId: String!): Rating!
+        getRatings(userId: String!): [Rating]
     }
 
     type Mutation {
