@@ -24,3 +24,8 @@ export interface Movie {
   actors: string;
   rating: Number;
 }
+
+export interface DeleteResponse {
+  id: string;
+  deletedCount?: number | undefined;
+}

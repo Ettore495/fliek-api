@@ -1,5 +1,5 @@
 import { currentUser, register, login } from "./auth";
-import { upsertMovie, getAllMovies, getMovie } from "./movie";
+import { upsertMovie, getAllMovies, getMovie, deleteMovie } from "./movie";
 
 const resolverMap = {
   Query: {
@@ -11,6 +11,7 @@ const resolverMap = {
     login,
     register,
     upsertMovie,
+    deleteMovie,
   },
 };
 

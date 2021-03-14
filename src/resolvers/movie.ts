@@ -1,4 +1,4 @@
-import { MovieResponse } from "src/types";
+import { DeleteResponse, MovieResponse } from "src/types";
 import { Movie, MovieModel } from "../models";
 
 export async function upsertMovie(_: void, args: any): Promise<MovieResponse> {
@@ -50,4 +50,15 @@ export async function getMovie(_: void, args: any): Promise<MovieResponse> {
     actors: movie.actors,
     rating: movie.rating,
   };
+}
+
+export async function deleteMovie(_: void, args: any): Promise<DeleteResponse> {
+  const { id } = args;
+
+  if (!id) {
+    throw new Error(`Please provide a movie id`);
+  }
+
+  const movieDeleted = await MovieModel.deleteOne({ _id: id });
+  return { id: id, deletedCount: movieDeleted.deletedCount };
 }
