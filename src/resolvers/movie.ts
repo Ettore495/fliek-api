@@ -4,8 +4,9 @@ import { Movie, MovieModel } from "../models";
 export async function upsertMovie(
   _: void,
   args: any,
-  { pubsub }: any,
+  { pubsub, userInfo }: any,
 ): Promise<MovieResponse> {
+  console.log(userInfo);
   // Get properties on request header
   const { id, name, duration, releaseDate, actors, averageRating } = args;
 
@@ -25,6 +26,7 @@ export async function upsertMovie(
   // Publish event
   pubsub.publish("MOVIE_CREATED", {
     movieCreated: movie,
+    user: userInfo,
   });
 
   // Return updated movie data
