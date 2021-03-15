@@ -1,7 +1,7 @@
 export interface RegisterResponse extends UserInfo {}
 export interface MovieResponse extends Movie {}
 
-export interface LoginResponse {
+export interface LoginResponse extends UserInfo {
   token: string;
 }
 

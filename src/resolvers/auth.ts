@@ -44,6 +44,10 @@ export async function login(_: void, args: any): Promise<LoginResponse> {
   );
   return {
     token,
+    id: user.id,
+    firstname: user.firstname,
+    lastname: user.lastname,
+    username: user.username,
   };
 }
 

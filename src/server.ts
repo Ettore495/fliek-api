@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import yargs from "yargs";
-import { ApolloServer } from "apollo-server";
+import { ApolloServer, PubSub } from "apollo-server";
 import { getUserInfo } from "./auth";
 import typeDefs from "./schema";
 import resolvers from "./resolvers";
@@ -20,12 +20,19 @@ async function start() {
     });
     console.log("Connected to DB.");
 
+    const pubsub = new PubSub();
+
     await new ApolloServer({
       typeDefs,
       resolvers,
-      context: ({ req }) => ({
-        userInfo: getUserInfo(req.headers.authorization || ""),
-      }),
+      context: ({ req }) => {
+        const token =
+          req && req.headers.authorization ? req.headers.authorization : "";
+        return {
+          userInfo: getUserInfo(token),
+          pubsub,
+        };
+      },
     }).listen(3000);
     console.log("GraphQl API running on port 3000.");
   } catch (err) {

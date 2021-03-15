@@ -1,7 +1,11 @@
 import { DeleteResponse, MovieResponse } from "src/types";
 import { Movie, MovieModel } from "../models";
 
-export async function upsertMovie(_: void, args: any): Promise<MovieResponse> {
+export async function upsertMovie(
+  _: void,
+  args: any,
+  { pubsub }: any,
+): Promise<MovieResponse> {
   // Get properties on request header
   const { id, name, duration, releaseDate, actors, averageRating } = args;
 
@@ -17,6 +21,11 @@ export async function upsertMovie(_: void, args: any): Promise<MovieResponse> {
 
   // Update movie model in DB
   await movie.updateOne(movie, { upsert: true });
+
+  // Publish event
+  pubsub.publish("MOVIE_CREATED", {
+    movieCreated: movie,
+  });
 
   // Return updated movie data
   return {
