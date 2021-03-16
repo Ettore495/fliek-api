@@ -9,6 +9,23 @@ export async function register(_: void, args: any): Promise<RegisterResponse> {
   if (existingUser) {
     throw new Error("Username already used!");
   }
+
+  if (!firstname) {
+    throw new Error("Firstname is empty!");
+  }
+
+  if (!lastname) {
+    throw new Error("last name is empty!");
+  }
+
+  if (!username) {
+    throw new Error("username name is empty!");
+  }
+
+  if (!password) {
+    throw new Error("password is empty!");
+  }
+
   const hashedPassword: string = await bcrypt.hash(password, 10);
   const user: User = new UserModel({
     firstname,

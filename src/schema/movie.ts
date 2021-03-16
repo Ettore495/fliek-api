@@ -10,6 +10,7 @@ const typeDef = `
 
     type DeleteResponse {
         id: String
+        name: String
         deletedCount: Int
     }
 
@@ -25,6 +26,7 @@ const typeDef = `
     
     type Subscription {
         movieCreated: Movie
+        movieDeleted: Movie
     }
 `;
 export default typeDef;

@@ -6,7 +6,6 @@ export async function upsertMovie(
   args: any,
   { pubsub, userInfo }: any,
 ): Promise<MovieResponse> {
-  console.log(userInfo);
   // Get properties on request header
   const { id, name, duration, releaseDate, actors, averageRating } = args;
 
@@ -26,6 +25,7 @@ export async function upsertMovie(
   // Publish event
   pubsub.publish("MOVIE_CREATED", {
     movieCreated: movie,
+    updated: id ? true : false,
     user: userInfo,
   });
 
@@ -69,13 +69,34 @@ export async function getMovie(_: void, args: any): Promise<MovieResponse> {
   };
 }
 
-export async function deleteMovie(_: void, args: any): Promise<DeleteResponse> {
+export async function deleteMovie(
+  _: void,
+  args: any,
+  { pubsub, userInfo }: any,
+): Promise<DeleteResponse> {
   const { id } = args;
 
-  if (!id) {
-    throw new Error(`Please provide a movie id`);
+  const movieToDelete = await MovieModel.findOne({
+    _id: id,
+  });
+
+  if (!movieToDelete) {
+    throw new Error(`Please provide a valid movie id`);
   }
 
-  const movieDeleted = await MovieModel.deleteOne({ _id: id });
-  return { id: id, deletedCount: movieDeleted.deletedCount };
+  const movieDeleted = await MovieModel.deleteOne({
+    _id: id,
+  });
+
+  // Publish event
+  pubsub.publish("MOVIE_DELETED", {
+    movieDeleted: movieToDelete,
+    user: userInfo,
+  });
+
+  return {
+    id: id,
+    name: movieToDelete.name,
+    deletedCount: movieDeleted.deletedCount,
+  };
 }

@@ -22,6 +22,10 @@ const resolverMap = {
       subscribe: (_: void, _1: void, { pubsub }: any) =>
         pubsub.asyncIterator(MovieSubscriptionKeys.MOVIE_CREATED),
     },
+    movieDeleted: {
+      subscribe: (_: void, _1: void, { pubsub }: any) =>
+        pubsub.asyncIterator(MovieSubscriptionKeys.MOVIE_DELETED),
+    },
   },
 };
 

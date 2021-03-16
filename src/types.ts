@@ -27,6 +27,7 @@ export interface Movie {
 
 export interface DeleteResponse {
   id: string;
+  name: string;
   deletedCount?: number | undefined;
 }
 
