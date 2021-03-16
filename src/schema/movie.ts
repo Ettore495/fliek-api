@@ -5,7 +5,7 @@ const typeDef = `
         duration: String!
         releaseDate: String!
         actors: String!
-        averageRating: Int
+        averageRating: Float
     }
 
     type DeleteResponse {
