@@ -14,6 +14,12 @@ const typeDef = `
         deletedCount: Int
     }
 
+    type MoviePublishResponse {
+        movie: Movie
+        update: Boolean
+        user: User
+    }
+
     type Query {
         getMovie(id: String!): Movie!
         getAllMovies(filter: String, sortDirection: String): [Movie]
@@ -25,8 +31,8 @@ const typeDef = `
     }
     
     type Subscription {
-        movieCreated: Movie
-        movieDeleted: Movie
+        movieCreated: MoviePublishResponse
+        movieDeleted: MoviePublishResponse
     }
 `;
 export default typeDef;

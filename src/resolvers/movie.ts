@@ -24,9 +24,11 @@ export async function upsertMovie(
 
   // Publish event
   pubsub.publish("MOVIE_CREATED", {
-    movieCreated: movie,
-    updated: id ? true : false,
-    user: userInfo,
+    movieCreated: {
+      movie: movie,
+      update: id ? true : false,
+      user: userInfo ? userInfo : {},
+    },
   });
 
   // Return updated movie data
@@ -90,8 +92,11 @@ export async function deleteMovie(
 
   // Publish event
   pubsub.publish("MOVIE_DELETED", {
-    movieDeleted: movieToDelete,
-    user: userInfo,
+    movieDeleted: {
+      movie: movieToDelete,
+      update: false,
+      user: userInfo ? userInfo : "",
+    },
   });
 
   return {

@@ -12,7 +12,10 @@ const typeDef = `
 
     type LoginResponse {
         token: String
-        user: User
+        id: String
+        firstname: String
+        lastname: String
+        username: String
     }
 
     type Mutation {
